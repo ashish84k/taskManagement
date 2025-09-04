@@ -11,13 +11,30 @@ const Dashboard = ({ users }) => {
     .filter((t) => {
       if (auth.role === "admin") return true;
       if (auth.role === "manager")
-        return users.some((u) => u.na === t.assignee);
+        return users?.some((u) => u.na === t.assignee);
       return t.assignee === auth.user?.fullName;
     })
     .slice(0, 10);
 
   return (
     <div className="space-y-6">
+
+      <div className="pt-10 pb-10 w-full bg-white flex flex-col items-center justify-center text-center px-6">
+  <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4 animate-pulse">
+    Welcome to Your Dashboard
+  </h2>
+
+  <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-indigo-600 mb-6 drop-shadow-lg animate-bounce">
+    {auth?.user?.fullName || "Guest"}
+  </h1>
+  Role : {auth?.user?.role || "user"}
+
+  <p className="text-gray-600 text-lg md:text-xl max-w-3xl leading-relaxed animate-fadeIn">
+    Explore your tasks, track your progress, and stay productive. Your personalized dashboard gives you a clear view of everything that matters.
+  </p>
+</div>
+
+
       <StatsCards
         userRole={auth.role}
         tasks={task.tasks}
@@ -90,7 +107,7 @@ const Dashboard = ({ users }) => {
             Team Performance
           </h3>
           <div className="space-y-4">
-            {users.slice(0, 3).map((user) => (
+            {users?.slice(0, 3)?.map((user) => (
               <div
                 key={user.id}
                 className="flex items-center justify-between p-4 rounded-lg border border-gray-200"
@@ -101,7 +118,7 @@ const Dashboard = ({ users }) => {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">
-                      {user.name}
+                      {user?.fullName}
                     </p>
                     <p className="text-xs text-gray-500">{user.role}</p>
                   </div>

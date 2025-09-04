@@ -35,18 +35,19 @@ function AnimatedCounter({ value, duration = 1.5 }) {
 }
 
 const StatsCards = ({ userRole, tasks, users, currentUser }) => {
-
+  
   let filteredTasks = tasks;
   if (userRole === "manager") {
-    filteredTasks = tasks.filter(
-      (task) => users.find((u) => u.name === task.assignee)?.managerId === currentUser.id
+    filteredTasks = tasks?.filter(
+      (task) => users?.find((u) => u.name === task.assignee)?.managerId === currentUser.id
     );
   } else 
     if (userRole === "user") {
-   
-    filteredTasks = tasks.filter((task) => task.assignee === currentUser?.fullName);
-  }
-
+      
+      filteredTasks = tasks.filter((task) => task.assignee === currentUser?.fullName);
+    }
+    
+    console.log(filteredTasks);
   const totalTasks = filteredTasks.length;
   const completedTasks = filteredTasks.filter((t) => t.status === "completed").length;
   const inProgressTasks = filteredTasks.filter((t) => t.status === "in-progress").length;

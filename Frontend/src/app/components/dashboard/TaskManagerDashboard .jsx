@@ -106,10 +106,10 @@ const TaskManagerDashboard = () => {
 
   
   
-  const recentTasks = task.tasks
+  const recentTasks = task?.tasks
     .filter((t) => {
       if (auth.role === 'admin') return true;
-      if (auth.role === 'manager') return users.some(u => u.na === t.assignee);
+      if (auth.role === 'manager') return users?.some(u => u.na === t.assignee);
       return t.assignee === auth.user?.fullName; 
     })
     .slice(0, 3); 
