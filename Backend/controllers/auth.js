@@ -147,14 +147,14 @@ const Logout = asyncHandler(async (req, res, next) => {
   
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.COOKIE_HTTP === "production",
     signed: true,
     sameSite: "Strict",
   });
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.COOKIE_HTTP === "production",
     signed: true,
     sameSite: "Strict",
   });
