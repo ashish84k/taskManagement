@@ -44,18 +44,18 @@ const Login = asyncHandler(async (req, res, next) => {
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: process.env.COOKIE_HTTP === "true",
     signed: true,
     maxAge: 15 * 60 * 1000,
-    sameSite: "Strict",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: process.env.COOKIE_HTTP === "true",
     signed: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: "Strict",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.status(200).json({
@@ -127,17 +127,17 @@ const TokenRefresh = asyncHandler(async (req, res, next) => {
   res.cookie("accessToken", newAccessToken, {
     httpOnly: true,
     maxAge: 15 * 60 * 1000,
-    sameSite: "Strict",
-    secure: process.env.COOKIE_HTTP === "true",
     signed: true,
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.cookie("refreshToken", newRefreshToken, {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: "Strict",
-    secure: process.env.COOKIE_HTTP === "true",
     signed: true,
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.json({ success: true, message: "Access token refreshed" });
@@ -147,16 +147,16 @@ const Logout = asyncHandler(async (req, res, next) => {
   
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: process.env.COOKIE_HTTP === "production",
     signed: true,
-    sameSite: "Strict",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: process.env.COOKIE_HTTP === "production",
     signed: true,
-    sameSite: "Strict",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production",
   });
 
   const userId = req.user?.id;
