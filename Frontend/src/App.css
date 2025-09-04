@@ -1,0 +1,15 @@
+  body {
+            background: #f8f9fa;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 90%;
+        }
+
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 1.5rem;
+                box-shadow: none !important;
+            }
+        }

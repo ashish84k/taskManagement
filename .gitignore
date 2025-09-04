@@ -1,0 +1,15 @@
+# Global ignore
+node_modules/
+dist/
+build/
+.vscode/
+.DS_Store
+
+# 🔒 Env files (only allow backend/.env.example)
+.env
+*.env
+frontend/.env
+frontend/.env.*
+backend/.env        # ignore real backend env
+backend/.env.*      # ignore other backend envs
+!backend/.env.example   # example file commit hoga
