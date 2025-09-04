@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://nodejs-production-ad66.up.railway.app", "task-management-olive-six.vercel.app"],
+    origin: ["http://localhost:5173","https://nodejs-production-ad66.up.railway.app", "https://task-management-olive-six.vercel.app"],
     credentials: true,
   })
 );
